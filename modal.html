@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Assistant Popup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .popup-container {
+            display: flex;
+            background-color: white;
+            width: 800px;
+            max-width: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .left-section {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .right-section {
+            flex: 1;
+            border-left: 1px solid #eee;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .trending {
+            margin-bottom: 30px;
+        }
+
+        .trending h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .product-grid {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product {
+            width: 48%;
+        }
+
+        .product-image {
+            background-color: #B0B4C0;
+            height: 110px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #444;
+        }
+
+        .special-offer {
+            background-color: #111827;
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .special-offer h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .special-offer p {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .claim-button {
+            background-color: white;
+            color: #111827;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .assistant-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .assistant-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .assistant-info h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .assistant-info p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .message-bubble {
+            background-color: #f5f5f5;
+            padding: 12px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            font-size: 14px;
+        }
+
+        .chat-input {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+        }
+
+        .send-button {
+            background: none;
+            border: none;
+            padding: 0 15px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="popup-container">
+        <div class="left-section">
+            <h1>Wait! Don't Miss Out!</h1>
+
+            <div class="trending">
+                <h2>Trending Now</h2>
+                <div class="product-grid">
+                    <div class="product">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Premium Watch</div>
+                        <div class="product-price">$199.99</div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">Product Image</div>
+                        <div class="product-name">Smart Device</div>
+                        <div class="product-price">$299.99</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="special-offer">
+                <h3>Special Offer!</h3>
+                <p>Get 20% off on your first purchase</p>
+                <button class="claim-button">Claim Now</button>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <button class="close-button">×</button>
+
+            <div class="assistant-header">
+                <div class="assistant-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+                            fill="#333" />
+                        <path d="M12 13C7.58172 13 4 16.5817 4 21H20C20 16.5817 16.4183 13 12 13Z" fill="#333" />
+                    </svg>
+                </div>
+                <div class="assistant-info">
+                    <h3>AI Shopping Assistant</h3>
+                    <p>Here to help you</p>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="message">
+                    <div class="message-bubble">
+                        Hi there! I noticed you're leaving. Can I help you find what you're looking for?
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message...">
+                <button class="send-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="#555" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#555" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // get assistantId from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const assistantId = urlParams.get('assistantId');
+        const fingerPrint = urlParams.get('fingerPrint');
+        const sessionId = urlParams.get('sessionId');
+        console.log('assistantId:', assistantId);
+        console.log('fingerPrint:', fingerPrint);
+        console.log('sessionId:', sessionId);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const closeButton = document.querySelector('.close-button');
+            const popupContainer = document.querySelector('.popup-container');
+            const chatInput = document.querySelector('.chat-input input');
+            const sendButton = document.querySelector('.send-button');
+            const chatContainer = document.querySelector('.chat-container');
+            const claimButton = document.querySelector('.claim-button');
+
+            // Close button functionality
+            closeButton.addEventListener('click', function () {
+                if (confirm('Are you sure you want to leave? You might miss out on special offers!')) {
+                    document.body.innerHTML = '<div style="padding: 30px; text-align: center;"><h2>Thank you for visiting!</h2></div>';
+                }
+            });
+
+            // Send message functionality
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    // Add user message
+                    const userMsg = document.createElement('div');
+                    userMsg.className = 'message';
+                    userMsg.style.justifyContent = 'flex-end';
+                    userMsg.innerHTML = `<div class="message-bubble" style="background-color: #e1f5fe;">${message}</div>`;
+                    chatContainer.appendChild(userMsg);
+
+                    // Clear input
+                    chatInput.value = '';
+
+                    // Simulate assistant response
+                    setTimeout(() => {
+                        const responses = [
+                            "I can help you find the perfect item! What are you looking for today?",
+                            "The Premium Watch is one of our bestsellers. Would you like more information?",
+                            "Don't forget about your 20% discount! It applies to any item in our store."
+                        ];
+                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+
+                        const assistantMsg = document.createElement('div');
+                        assistantMsg.className = 'message';
+                        assistantMsg.innerHTML = `<div class="message-bubble">${randomResponse}</div>`;
+                        chatContainer.appendChild(assistantMsg);
+
+                        // Scroll to bottom
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                    }, 1000);
+
+                    // Scroll to bottom
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // Claim button functionality
+            claimButton.addEventListener('click', function () {
+                alert('Congratulations! Your 20% discount has been applied to your account.');
+            });
+        });
+    </script>
+</body>
+
+</html>
